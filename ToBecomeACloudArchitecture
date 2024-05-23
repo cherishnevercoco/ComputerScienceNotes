@@ -5,5 +5,39 @@ Cloud architects oversee application architecture and deployment in cloud enviro
 -- including public cloud, private cloud and hybrid cloud. 
 Additionally, cloud architects act as consultants to their organization and need to stay up-to-date on the latest trends and issues.
 
+****如何成为一名云架构师****
+1. 至少熟悉一种操作语言，linux, unix, solaris, ubuntu, windows. 最好是linux操作系统，
+比如ubuntu或者red hat，在任何知名操作系统中担任管理员或架构师的经验都很有帮助。
+
+2.深入了解network：TCP/IP IP Address http DNS etc
+
+3. 计算机编程语言，对编程和脚本语言有最低限度的了解
+
+4. 安全性：对关键安全概念的高层次理解，初步了解基本的安全概念，例如防火墙
+
+最重要的技能：
+1. 了解服务如何连接以及服务的集成
+2. 掌握实时监控资源和应用。包括监控整个堆栈（应用程序，基础设施，网络和服务）并使用警报，
+日志和事件数据来采取自动化操作并缩短平均解决时间MTTR。可以专注构建应用程序和业务价值。
+amazon cloud watch就是做这个的
+
+3. 安全控制云资源和云服务，例如 aws identity and access management IAM
+
+推荐的certi
+AWS Solutions Architest Associate
+AWS Solutions Architect Professional
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

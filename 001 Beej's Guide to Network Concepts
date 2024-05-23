@@ -157,6 +157,33 @@ so that the server can handle multiple clients at once.
 
 ****Chapter 4: The Layered Network Model****
 
+IP address
+Port - programs talk through ports, 0-65535 and are associated with the TCP or UDP protocols
+     - since multiple programs can be running on the same IP address, the port provide a way to uniquely identify those programs on the network
+     - Here we try to connect to example.com on port 3490: http://example.com:3490/foo.html
+TCP - Transmission Control Protocol
+    - responsible for reliable, in-order data transmission
+UDP - lighter weight version. does not guarantee data will arrive or that it will be in order, or that it will not be duplicated
+    - UDP sockets are called datagram sockets
+IPv6 address - looks like ::1 or 2001:db8::8a2e:370:7334 or even bigger
+NAT - Network Address Tranlation. a way to allow organizations to have private subnets with non-globally-unique addresses that get translated to globally-unique addresses
+      as they pass through the router
+      private subnets commonly starts with addresses 192.168.x.x or 10.x.x.x.
+Router - a specialized computer that forwards packets through the packet switching network. it inspects destination IP addresses to determine which route will get the packet closer to its goal
+IP - internet protocol. for idetifying computers by IP address and using those addresses to route data to recipoenys through a variety of routers
+LAN - a network where all the computers are directly connected, not via a router
+Interface - physical networking hardware on a computer. maybe 2 in my pc, a wired Ethernet interface and a aireless Ethernet interface
+          - my home router may only has 2 interfaces: one facing inward to your LAN and the other facing outward to the rest of the internet
+          - each interface typically has 1 IP address and 1 MAC address
+          - the OS names the interface on your local machine. they might be something like wlan0 or eth2.
+Hearder - some data that is prepended to some other data by a particular protocol. the hearder contains info that is appropriate for that protocol.
+        - A TCP header would include some error detection and correction information and a source and destination port number. IP would include the source and destination IP addresses.
+        - Ethernet would include the source and destination MAC addresses
+        - http response would include things like the length of the data, the date modified and whether or not the request was successful
+        - putting a header in front of the data is like putting your letter in an envelope
+
+
+
 
 
 

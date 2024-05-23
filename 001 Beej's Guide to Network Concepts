@@ -1,3 +1,188 @@
 ****Beej's Guide to Network Concepts****
 
+****Chapter 001: Network Overview****
+
+1. packet switched 
+no dedicated wires, but the info are cut into several packages to share the same wire.
+
+2. client/server architecture
+a server is a program that listens for incoming connections, acceptes them, and then
+receives a request from the client and sends back a response to the client.
+
+client and server are network programs. The practical difference 实际区别 is 
+the server program sitting there waiting for clients to call.
+
+3. OS, network programming and sockets
+network is hardware 
+OS controls all access to hardware
+so, if we want to write software to use the network, we have to do it through OS
+this is done using an API called sockets API that was pioneered on Unix
+sockets 插座/应用程序接口/眼窝
+
+4. protocols
+the conversation b/t client and server is written down very specifically 
+what bytes get sent when and from and to whom. it has to be wrapped up a certain way.
+
+if we need to pass data b/t 2 speciallized programs you write,
+we have to define a protocol for that.
+
+some common protocols：
+TCP - used to transmit data reliably
+UDP - used to transmit data quickly and unreliably
+IP - used to route packets over the internet from one computer to another
+HTTP - used to get web pages and make other web requests
+Ethernet - used to send data over a LAN
+
+these protocols live at different layers of the network software
+
+5. network layer and abstraction 
+-- a user program says "i want to send the bytes [GET/HTTP/1.1] to that web server over there"
+servers are identified by IP address and port on the internet
+
+-- the OS takes the data and wraps it up in a header(that is，prepends预先计划 some data)
+that provides error detection/or checks the order information. the exact structure of this header
+would be defined by a protocol such as TCP or UDP.
+
+-- the OS takes all of that and wraps it up in another header that helps with routing.
+this header would be defined by the IP protocol.
+
+-- the OS hands all that data to the network interface card (NIC, the piece of hardware that's responsible for networking)
+
+-- the NIC wraps all that data up into another header that's defined by a protocal such as Ethernet that
+helps with delivery on the LAN
+
+-- the NOC sends the entire, multiply-wrapped data out over the wire, or over the air (with wifi)
+
+-- when receving computer gets the packet, the reverse process happens. NIC strips Ethernet header,
+the OS makes sure the IP address is correct, figures out which program is listening on that port,
+and sends it the fully unwrapped data
+
+all these different layers that do all this wrapping are together called "protocol stack" 协议栈
+
+each layer handles different part of the process, e.g. one layer handles data integrity, 
+another handles routing the packet over the internet, 
+another handles the data itself transmitted b/t the programs 
+each layer does not care about what the layers below it are doing with the data
+
+6. wired versus wireless
+when we say the comupters are on the same LAN, we mean they are either wired together 
+or they are using the same wifi access point. they are connected by physical cables that is commonly
+used with ethernet, or all connected to the same wifi access point. they both use the ethernet protocal
+for low-level comminication.
+
+
+
+****Chapter 002: Introducing the Sockets API****
+socket api是网络编程的基础，是对两台主机间利用各个通信协议进行通信行为的封装，
+操作系统以系统调用的形式将这个统一的接口提供给应用程序。
+各个编程语言的网络编程接口的底层都是基于操作系统的socket api
+
+in unix, the sockets API generally gives processes a way to communicate with one another.
+it supports a wariety of methods of communication, and one those methods is over the internet.
+
+In C and Unix, the sockets API is a blend of library calls and system calls (functions that call the OS directly).
+库调用和系统调用的混合（直接调用OS的函数）
+
+In Python, the Python sockets API is a library that calls the lower-level C sockets API. 
+
+On other platforms, it will call whatever API that OS exposes for network communication.
+
+1. client connection process
+using sockets = severals steps you have to take to connect to another computer, and they are not obvious
+
+write a client program is:
+
+-- ask the OS for a socket
+In C, this is just a file descriptor (an interger) that will be used from this step to refer to this network connection
+python will return an object representing the socket
+other language APi might retrun different things
+
+this step, you have a way to refer to this socket for upcoming data transmission
+
+-- perform a DNS lookup 
+convert the human-readable name like google.com into an address like 198.51.22.22.
+DNS is the distributed database that holds this mapping, and we query it to get the IP address
+
+we need the IP address so that we know the machine to connect to 
+
+in python, we can use socket.getaddrinfo(), or socket.connect() to do the DNS lookup
+in c, we can use getaddrinfo() to perform the DNS lookup
+
+--connect the socket to the IP address on a specific port
+port, an oprn door, iintegers that range from 0 to 65535
+
+80, a standard port used for servers that speak the http protocol(unencryted)
+
+there must be a server listening on that port on that remote computer, or the connection will fail
+
+-- send data and receive data
+in a sequence of bytes
+
+-- close the connection
+
+2. Server Listening Process
+writing a server program is:
+
+-- ask the OS for a socket
+
+-- bind the socket to a port
+assign a port number to the server that other clients can connect to
+"i am going to be listening on port 80"
+
+caveat[ˈkæviæt] 预先声明：
+programs need to be run as root/admin to bind to ports under 1024 -- those are reserved
+choose a big, uncommon port like 15,0000 - 30,0000 range
+if you try to bind to a port number another server is using, you will get "address already in use" error
+
+2 pc, one port, ok
+2 programs on the same pc, one port, no
+
+clients are bound to a port as well. they get assigned an unused port when connect
+
+-- listen for incoming connections
+
+-- accept incoming connections
+the server will block/sleep when you try to accept a new connectio if none are pending
+then it wakes up when someone tries to connect
+
+-- accept returns a new socket!
+the server made in step1 is still there listening for new connections.
+when the connection arrives, the OS makes a new socket specifically for that one connection
+so that the server can handle multiple clients at once.
+
+-- send data and receive data
+
+--  go back and accept another connection
+
+
+****Chapter 4: The Layered Network Model****
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

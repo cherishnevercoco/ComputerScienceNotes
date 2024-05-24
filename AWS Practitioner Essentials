@@ -1,0 +1,108 @@
+Monolithic applications and mircoservices
+- prefer loosely couple components to prevent the whole application from failing
+
+Amazon SNS (Simple Notification Service)
+
+Amazon SQS (Simple Queue Service)
+- message queuing services, which means the other application do not have to be online
+- send, store, receive messages between software
+
+AWS Lambda
+- run code serverlessly, to create an instance (virtual server)
+- set code to trigger from an event source
+- charge only when your code is running
+
+Container / instance
+Container 
+- lightweight and standalone executable packages
+- In AWS, using Amazon Elastic Container Service (ECS) or Amazon Elastic Kubernetes Service (EKS)
+- Share the host OS. In the same host, resources impact each other
+
+Instance 
+- a virtual server/VM
+- In AWS, using Amazon Elastic Compute Cloud (EC2)
+- Instances have strict resource isolation, including CPU, memory, OS, storage, network capabilities
+
+2 container orchestration services to help you manage thousands of containers – ECS/EKS
+ECS
+- container management sys to run and scale containerized applications on AWS
+- support Docker containers (Docker – a software platform to build/test/deploy appl quickly)
+
+EKS
+- fully managed service to run Kurbenetes on AWS
+
+AWS Fargate
+- server compute engine for containers
+- support ECS and EKS
+- PAYG
+ 
+
+
+AWS Global Infrastructure
+- select a region 
+-- compliance with data governance and legal requirements
+-- proximity to your customers
+-- available services within a region
+-- pricing
+
+AZ Availability Zone
+Resources --> data center --> AZ --> region
+- a region consists of three or more AZ
+
+
+Edge Locations/Amazon CloudFront
+- edge location is a site that Amazon CloudFront uses to store cached copies of your content closer to your customer for faster delivery. 
+- so instead of requiring your customers to get content from the company's data store like Brazil,
+- you can copy the cache locally at an edge location that is close to your customers in China. 
+- when a customer in china requests files, Amazon CloudFront retrieves the file from the cache in the edge location and delivers the file to the customer. it is faster
+- Amazon CloudFront - a global content delivery service
+
+How to Provision AWS Resources
+- ways to interact with AWS services
+-- AWS MANAGEMENT CONSOLE
+-- AWS COMMAND LINE INTERFACE (AWS CLI)
+-- SOFTWARE DEVELOPMENT KITS (SDKs)
+
+Here are 2 services for interaction:
+
+AWS Elastic Beanstalk
+- a managed service for web applications developers to upload their application code and environment config and automatically handles the deployment details
+- provide code and cofig settings, deploys the resources necessary to perform the following tasks
+-- adjust capacity
+-- load balancing
+-- automatic scaling
+-- application health monitoring
+
+AWS CloudFormation
+- treat your infrastructure as code
+- build an environment by writing code instead of using console to individually provision resources
+- do not have to repeat
+
+AWS Outposts
+- a fully managed solution delivering AWS infrastructure and services to virtually any on-premises or edge location for hybrid experience
+- extend AWS infra and services to different locations including your on-premises data center
+
+****Connectivity to AWS****
+
+Amazon Virtual Private Cloud (Amazon VPC)
+- provision an isolated section of the AWS Cloud
+- launch resources in a virtual network, organize within subnet
+
+Internet gateway
+- to allow public tranffic from the internet to access your VPC, you attch internet gateway to the VPC
+- client-->internet-->Internet GW-->AWS Cloud-->VPC-->Subnet-->Amazon EC2 Instances
+- a connection b/t VPC and the internet, a doorway
+
+Virtual private gateway
+- to access private resources in a VPC
+- the bodyguard is like a virtual private network (VPN) that encrypts/protect your internet traffic from all the other requests around it
+- virtual private gw is the component that allows protected internet traffic to enter into the VPC
+- content firewall/router --> VPN connection --> AWS cloud --> Virtual private gateway --> VPC --> Subnet
+
+
+
+
+
+
+
+
